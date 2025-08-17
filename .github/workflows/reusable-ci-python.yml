@@ -25,4 +25,4 @@ jobs:
           if [ -f requirements.txt ]; then python -m pip install -U pip && pip install -r requirements.txt; else echo "No requirements.txt; skipping"; fi
       - name: Run tests (pytest if present)
         run: |
-          if python -c "import pytest" 2>/dev/null; then pytest -q || true; else echo "pytest not installed; skipping"; fi
+          if command -v pytest >/dev/null 2>&1; then pytest -q || true; else echo "pytest not installed; skipping"; fi
