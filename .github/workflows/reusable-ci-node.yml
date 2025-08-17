@@ -1,4 +1,4 @@
-name: Reusable CI (Node.js)
+name: Reusable CI (Node)
 
 on:
   workflow_call:
@@ -20,5 +20,9 @@ jobs:
         with:
           node-version: ${{ inputs.node-version }}
           cache: 'npm'
-      - run: npm ci
-      - run: npm test --if-present
+      - name: Install dependencies (if package.json exists)
+        run: |
+          if [ -f package.json ]; then npm ci; else echo "No package.json; skipping"; fi
+      - name: Run tests (if test script exists)
+        run: |
+          if [ -f package.json ] && jq -e '.scripts.test' package.json >/dev/null 2>&1; then npm test --if-present; else echo "No test script; skipping"; fi
