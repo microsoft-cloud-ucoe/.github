@@ -1,0 +1,5 @@
+# Copy this to each repository as .github/CODEOWNERS or CODEOWNERS at repo root.
+# Example:
+# *       @org/team-core
+# /src/   @org/team-frontend
+# /api/   @org/team-backend
